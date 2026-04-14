@@ -1,0 +1,33 @@
+{
+  "name": "sword-realms-page",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Larevvv/sword-realms.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Larevvv/sword-realms/issues"
+  },
+  "homepage": "https://github.com/Larevvv/sword-realms#readme",
+  "devDependencies": {
+    "@chialab/esbuild-plugin-worker": "^0.19.1",
+    "compression": "^1.8.1",
+    "esbuild": "^0.28.0",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14",
+    "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "dompurify": "^3.4.0",
+    "marked": "^18.0.0"
+  }
+}
