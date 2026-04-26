@@ -13,7 +13,7 @@ export default defineConfig([
         files: ["./src/**/*.ts"],
     },
     {
-        files: ["./public/pages/**/*.md"],
+        files: ["./dist/public/pages/**/*.md"],
         plugins: { markdown },
         language: "markdown/gfm",
         languageOptions: {
@@ -21,7 +21,7 @@ export default defineConfig([
             math: true,
         },
         rules: {
-            "no-multiple-h1": ["error", { frontmatterTitle: "" }],
+            "markdown/no-multiple-h1": ["error", { frontmatterTitle: "" }],
             "markdown/no-html": [
                 "error",
                 {
