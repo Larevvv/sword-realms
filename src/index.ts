@@ -32,6 +32,9 @@ const loadURLContent = () => {
 
 loadURLContent();
 
-window.addEventListener("hashchange", () => {
-    loadURLContent();
-});
+// Fixes double render on root path.
+setTimeout(() => {
+    window.addEventListener("hashchange", () => {
+        loadURLContent();
+    });
+}, 0);
