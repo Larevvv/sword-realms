@@ -1,30 +1,23 @@
-import DOMPurify from "dompurify";
+import ZeroMd from "zero-md";
+import { MetaExtractExtension } from "./plugins/meta-extract";
+import { PAGE_MAIN } from "./helpers/page-elements";
+
+customElements.define(
+    "zero-md",
+    class extends ZeroMd {
+        override async load() {
+            await super.load();
+            this.marked.use(MetaExtractExtension);
+        }
+    },
+);
 
 const loadURLContent = () => {
     const targetPath = location.pathname.slice(1);
-    console.log({ targetPath });
-    myWorker.postMessage(targetPath);
+
+    if (PAGE_MAIN) {
+        PAGE_MAIN.innerHTML = `<zero-md src="/public/pages/${targetPath || "index"}.md"><template></template></zero-md>`;
+    }
 };
-
-const myWorker = new Worker("/public/js/worker.js");
-
-myWorker.onmessage = (e) => {
-    document.body.innerHTML = DOMPurify.sanitize(e.data);
-
-    document.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-
-            const target = event.target as HTMLAnchorElement;
-            history.pushState(null, "", target.href);
-            loadURLContent();
-        });
-    });
-};
-
-window.addEventListener("popstate", (event) => {
-    loadURLContent();
-});
 
 loadURLContent();
