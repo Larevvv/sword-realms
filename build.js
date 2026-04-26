@@ -4,5 +4,5 @@ esbuild.build({
     entryPoints: ["src/index.ts", "src/worker.ts"],
     bundle: true,
     format: "esm",
-    outdir: "public/js",
+    outdir: "dist/public/js",
 });

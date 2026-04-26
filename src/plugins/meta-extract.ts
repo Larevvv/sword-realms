@@ -28,7 +28,7 @@ export const MetaExtractExtension: MarkedExtension = {
             const { attributes, body } = fm<Partial<PageMeta>>(markdown);
             console.log({ attributes });
 
-            const pageURL = `${location.origin}${location.pathname}`;
+            const pageURL = `${location.origin}${location.pathname}${location.hash}`;
 
             const { title, ...metas } = {
                 ...defaultPageMeta,

@@ -1,6 +1,7 @@
 import ZeroMd from "zero-md";
 import { MetaExtractExtension } from "./plugins/meta-extract";
 import { PAGE_MAIN } from "./helpers/page-elements";
+import { HashAnchorExtension } from "./plugins/hash-anchor";
 
 customElements.define(
     "zero-md",
@@ -8,16 +9,29 @@ customElements.define(
         override async load() {
             await super.load();
             this.marked.use(MetaExtractExtension);
+            this.marked.use(HashAnchorExtension);
         }
     },
 );
 
+if (!window.location.hash) {
+    window.location.hash = "#/";
+}
+
 const loadURLContent = () => {
-    const targetPath = location.pathname.slice(1);
+    let targetPath = window.location.hash.slice(2);
+
+    if (targetPath.endsWith("/") || !targetPath) {
+        targetPath = targetPath + "index";
+    }
 
     if (PAGE_MAIN) {
-        PAGE_MAIN.innerHTML = `<zero-md src="/public/pages/${targetPath || "index"}.md"><template></template></zero-md>`;
+        PAGE_MAIN.innerHTML = `<zero-md src="public/pages/${targetPath}.md"><template></template></zero-md>`;
     }
 };
 
 loadURLContent();
+
+window.addEventListener("hashchange", () => {
+    loadURLContent();
+});

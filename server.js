@@ -1,19 +1,30 @@
 const express = require("express");
 const compression = require("compression");
 const app = express();
+const server = express();
 const path = require("path");
 const nodemon = require("nodemon");
 
+const baseUrl = "/sword-realms";
+const distUrl = "dist";
+
+server.use(baseUrl, app);
+
 app.use(compression());
-app.use("/public", express.static("public", { fallthrough: false }));
+app.use("/public", express.static(distUrl + "/public", { fallthrough: false }));
 
 const port = process.env.PORT || 3000;
 
-app.get("*asd", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "index.html"));
+// Emulating github pages routing.
+app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, distUrl + "/index.html"));
 });
 
-app.listen(port, () => {
+app.get("*asd", (req, res) => {
+    res.sendFile(path.resolve(__dirname, distUrl + "/404.html"));
+});
+
+server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
