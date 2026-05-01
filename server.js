@@ -4,8 +4,19 @@ const app = express();
 const server = express();
 const path = require("path");
 const nodemon = require("nodemon");
+const result = require("dotenv").config({
+    path: path.resolve(
+        __dirname,
+        `.env${process.env.NODE_ENV ? "." + process.env.NODE_ENV : ""}`.trim(),
+    ),
+    quiet: true,
+});
 
-const baseUrl = "/sword-realms";
+if (result.error) {
+    throw result.error;
+}
+
+const baseUrl = process.env.BASE_URL;
 const distUrl = "dist";
 
 server.use(baseUrl, app);

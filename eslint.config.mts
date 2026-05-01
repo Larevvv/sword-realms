@@ -8,10 +8,10 @@ export default defineConfig([
         files: ["./src/**/*.{js,mjs,cjs,ts,mts,cts}"],
         languageOptions: { globals: globals.browser },
     },
-    {
-        ...tseslint.configs.recommended,
+    ...tseslint.configs.recommended.map((v) => ({
+        ...v,
         files: ["./src/**/*.ts"],
-    },
+    })),
     {
         files: ["./dist/public/pages/**/*.md"],
         plugins: { markdown },
