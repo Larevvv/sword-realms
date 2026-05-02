@@ -1,7 +1,5 @@
 # Style test page
 
----
-
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas egestas dignissim iaculis. Nam tincidunt viverra tempus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean et dui tempus, bibendum orci at, commodo purus. In feugiat sem ac eros condimentum, et egestas dolor dictum. Sed ultricies tortor sed diam efficitur lacinia. Morbi porttitor massa efficitur quam euismod facilisis.
 
 ## H2 heading
@@ -24,11 +22,31 @@ Ut dui lectus, euismod placerat auctor eget, blandit in felis. In non pulvinar v
 
 Smallest heading possible
 
+---
+
 ## Other elements
 
 This is **bold text**
 
 This is _italic text_
+
+```ts
+// This is a code block
+customElements.define(
+    "zero-md",
+    class extends ZeroMd {
+        override async load() {
+            await super.load({
+                markedAlert: MarkedAlertOverride,
+                mermaid: MermaidOverride,
+            });
+            this.marked.use(MetaExtractExtension);
+            this.marked.use(HashAnchorExtension);
+            this.marked.use(TimestampExtension);
+        }
+    },
+);
+```
 
 ### Highlights
 

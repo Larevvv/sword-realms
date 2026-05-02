@@ -3,6 +3,8 @@ import type { MarkedExtension } from "marked";
 const timestampRegex = /<t:(\d+):(\w)>/;
 const tokenizerRule = new RegExp(`^${timestampRegex.source}`);
 
+let timestampID = 0;
+
 function getLocale() {
     return navigator.languages && navigator.languages.length
         ? navigator.languages[0]
@@ -124,12 +126,17 @@ const parserEntries = {
         Partial<Intl.DateTimeFormatOptions>
     >,
 } satisfies {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [v: string]: parserEntry<any, any>;
 };
 
 const timestampParsers: {
     [v: string]:
-        | ((timestamp: number) => { text: string; datetime: string })
+        | ((timestamp: number) => {
+              text: string;
+              datetime: string;
+              popup: string;
+          })
         | undefined;
 } = Object.entries(parserEntries).reduce((a, [key, value]) => {
     const localFormatter = new value.constructor(locale, {
@@ -141,12 +148,14 @@ const timestampParsers: {
         ...a,
         [key]: (timestamp: number) => ({
             text: localFormatter.format(timestamp),
+            popup:
+                key !== "F"
+                    ? timestampParsers["F"]?.(timestamp).text
+                    : localFormatter.format(timestamp),
             datetime: new Date(timestamp).toISOString(),
         }),
     };
 }, {});
-
-const getUTCTime = (date) => date.getTime() - date.getTimezoneOffset() * 60000;
 
 if (!timestampParsers["R"]) {
     const unitTresholds: [Intl.RelativeTimeFormatUnit, number][] = [
@@ -181,6 +190,7 @@ if (!timestampParsers["R"]) {
         if (!pickedUnit) {
             return {
                 text: "",
+                popup: "",
                 datetime: new Date(timestamp).toISOString(),
             };
         }
@@ -190,6 +200,7 @@ if (!timestampParsers["R"]) {
                 Math.floor(difference / pickedUnit[1]),
                 pickedUnit[0],
             ),
+            popup: timestampParsers["F"]?.(timestamp).text ?? "",
             datetime: new Date(timestamp).toISOString(),
         };
     };
@@ -234,7 +245,10 @@ export const TimestampExtension: MarkedExtension = {
                 if (!token.result) {
                     return "";
                 }
-                return `<time datetime="${token.result.datetime}">${token.result.text}</time>`;
+                return `
+                <time datetime="${token.result.datetime}" data-popup="${token.result.popup}">
+                    ${token.result.text}
+                </time>`.trim();
             },
         },
     ],

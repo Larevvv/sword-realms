@@ -2,15 +2,12 @@
     box-sizing: border-box;
 }
 
-h1 {
-    text-align: center;
-}
-
 .markdown-body {
     color: white;
     border-image-source: url("/public/assets/silver_frame.png");
     border-image-slice: 6 6 6 6 fill;
     border-image-width: 16px 16px 16px 16px;
+    border-image-outset: 4px 4px 4px 4px;
     border-image-repeat: stretch stretch;
     border-style: solid;
 
@@ -18,8 +15,12 @@ h1 {
 
     margin-inline: auto;
     width: 900px;
-    /*max-width: calc(100% - 48px - 6px);*/
     font-family: Verdana;
+    margin-top: 35vh;
+    margin-bottom: 10vh;
+
+    -webkit-box-shadow: 0px 10px 8px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 10px 8px 4px rgba(0, 0, 0, 0.5);
 }
 
 @media only screen and (max-width: 900px) and (min-width: 600px) {
@@ -34,6 +35,27 @@ h1 {
     }
 }
 
+.mermaid,
+pre:has(code),
+.katex-display,
+h1 {
+    color: white;
+    border-image-source: url("/public/assets/gold_frame.png");
+    border-image-slice: 6 6 6 6 fill;
+    border-image-width: 16px 16px 16px 16px;
+    border-image-outset: 4px 4px 4px 4px;
+    border-image-repeat: stretch stretch;
+    border-style: solid;
+
+    margin-block: 8px;
+    padding: 8px;
+}
+
+.mermaid {
+    display: flex;
+    justify-content: center;
+}
+
 h1,
 h2,
 h3,
@@ -46,6 +68,10 @@ h6 {
 
 h1 {
     font-size: 3rem;
+    padding-block: 0.5em;
+    margin: 0;
+    text-align: center;
+    margin-top: calc(-3rem - 0.5em);
 }
 
 h2 {
@@ -57,19 +83,68 @@ h3 {
 }
 
 h4 {
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 h5 {
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 h6 {
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 a {
     color: white;
+}
+
+button {
+    all: unset;
+}
+
+time {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    cursor: help;
+    display: inline-block;
+    position: relative;
+    anchor-name: --time-anchor;
+    anchor-scope: all;
+
+    &[data-popup] {
+        &::after {
+            content: attr(data-popup);
+            height: 1rem;
+            color: white;
+            font-weight: bold;
+            position-anchor: --time-anchor;
+            position: fixed;
+            bottom: anchor(top);
+            justify-self: anchor-center;
+            margin-bottom: 1em;
+            padding: 4px;
+            display: none;
+
+            border-image-source: url("/public/assets/gold_frame.png");
+            border-image-slice: 7 7 7 7 fill;
+            border-image-width: 7px 7px 7px 7px;
+            border-image-outset: 4px 4px 4px 4px;
+            border-image-repeat: stretch stretch;
+            border-style: solid;
+            -webkit-box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (hover: hover) {
+            &:hover::after {
+                display: inline-block;
+            }
+        }
+
+        &:active::after {
+            display: inline-block;
+        }
+    }
 }
 
 @font-face {

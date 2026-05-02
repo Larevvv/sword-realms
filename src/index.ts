@@ -4,6 +4,7 @@ import { PAGE_MAIN } from "./helpers/page-elements";
 import { HashAnchorExtension } from "./plugins/hash-anchor";
 import { MarkedAlertOverride } from "./plugins/alert-override";
 import { TimestampExtension } from "./plugins/timestamps";
+import { MermaidOverride } from "./plugins/mermaid-override";
 
 customElements.define(
     "zero-md",
@@ -11,6 +12,7 @@ customElements.define(
         override async load() {
             await super.load({
                 markedAlert: MarkedAlertOverride,
+                mermaid: MermaidOverride,
             });
             this.marked.use(MetaExtractExtension);
             this.marked.use(HashAnchorExtension);
