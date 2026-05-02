@@ -1,0 +1,79 @@
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+}
+
+.markdown-body {
+    color: white;
+    border-image-source: url("/public/assets/silver_frame.png");
+    border-image-slice: 6 6 6 6 fill;
+    border-image-width: 16px 16px 16px 16px;
+    border-image-repeat: stretch stretch;
+    border-style: solid;
+
+    padding: 24px;
+
+    margin-inline: auto;
+    width: 900px;
+    /*max-width: calc(100% - 48px - 6px);*/
+    font-family: Verdana;
+}
+
+@media only screen and (max-width: 900px) and (min-width: 600px) {
+    .markdown-body {
+        width: 600px !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .markdown-body {
+        width: 100% !important;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: white;
+    font-family: rpg-text;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+h5 {
+    font-size: 18px;
+}
+
+h6 {
+    font-size: 16px;
+}
+
+a {
+    color: white;
+}
+
+@font-face {
+    font-family: rpg-text;
+    src: url("/public/assets/FantasyRPGtitle.ttf");
+    font-weight: 600;
+}
