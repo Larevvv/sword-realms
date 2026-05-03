@@ -33,6 +33,12 @@ const mdTemplate = `
         </style>
         <link rel="stylesheet" href="public/styles/main.css" />
 
+        <!-- Highlightjs Github theme (light) -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11/styles/github.min.css" />
+
+        <!-- Highlightjs Github theme (prefers dark) -->
+        <link rel="stylesheet" media="(prefers-color-scheme:dark)" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11/styles/github-dark.min.css" />
+
         <!-- KaTeX styles (needed for math) -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
     </template>

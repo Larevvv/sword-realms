@@ -3,8 +3,6 @@ import type { MarkedExtension } from "marked";
 const timestampRegex = /<t:(\d+):(\w)>/;
 const tokenizerRule = new RegExp(`^${timestampRegex.source}`);
 
-let timestampID = 0;
-
 function getLocale() {
     return navigator.languages && navigator.languages.length
         ? navigator.languages[0]

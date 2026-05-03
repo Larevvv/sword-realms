@@ -30,6 +30,23 @@ This is **bold text**
 
 This is _italic text_
 
+- List item 1
+- List item 2
+- List item 3
+    - Inner list item
+    - another
+- List item 4
+
+1. foo
+2. bar
+3. foobar
+
+> This is a block of some kind?
+
+> Idk if this is supposed to stack
+> Or not
+> this might work?
+
 ```ts
 // This is a code block
 customElements.define(
