@@ -1,3 +1,5 @@
+![Demo image](https://images.pexels.com/photos/5356421/pexels-photo-5356421.jpeg)
+
 # Style test page
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas egestas dignissim iaculis. Nam tincidunt viverra tempus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean et dui tempus, bibendum orci at, commodo purus. In feugiat sem ac eros condimentum, et egestas dolor dictum. Sed ultricies tortor sed diam efficitur lacinia. Morbi porttitor massa efficitur quam euismod facilisis.
@@ -44,7 +46,7 @@ This is _italic text_
 > This is a block of some kind?
 
 > Idk if this is supposed to stack
-> Or not
+>
 > this might work?
 
 ```ts

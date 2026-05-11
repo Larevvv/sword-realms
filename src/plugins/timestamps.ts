@@ -145,12 +145,12 @@ const timestampParsers: {
     return {
         ...a,
         [key]: (timestamp: number) => ({
-            text: localFormatter.format(timestamp),
+            text: localFormatter.format(timestamp * 1000),
             popup:
                 key !== "F"
                     ? timestampParsers["F"]?.(timestamp).text
-                    : localFormatter.format(timestamp),
-            datetime: new Date(timestamp).toISOString(),
+                    : localFormatter.format(timestamp * 1000),
+            datetime: new Date(timestamp * 1000).toISOString(),
         }),
     };
 }, {});
@@ -189,7 +189,7 @@ if (!timestampParsers["R"]) {
             return {
                 text: "",
                 popup: "",
-                datetime: new Date(timestamp).toISOString(),
+                datetime: t.toISOString(),
             };
         }
 
@@ -199,7 +199,7 @@ if (!timestampParsers["R"]) {
                 pickedUnit[0],
             ),
             popup: timestampParsers["F"]?.(timestamp).text ?? "",
-            datetime: new Date(timestamp).toISOString(),
+            datetime: t.toISOString(),
         };
     };
 }

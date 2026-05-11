@@ -2,6 +2,13 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: black;
+    background-image: url("/public/assets/background.png");
+    background-size: 64px;
+    background-attachment: fixed;
+}
+
 .markdown-body {
     color: white;
     border-image-source: url("/public/assets/silver_frame.png");
@@ -41,10 +48,25 @@
     }
 }
 
+.markdown-body p:first-child img {
+    position: absolute;
+    top: 17.5vh;
+    left: 0;
+    width: 100%;
+    max-height: 40vh;
+    min-height: 40vh;
+    z-index: -5;
+    object-fit: cover;
+    object-position: center;
+    mask-image: linear-gradient(0deg, transparent 0px, black 5vh);
+    transform: translate(0, -50%);
+}
+
 .mermaid,
 pre:has(code),
 .katex-display,
-.markdown-alert {
+.markdown-alert,
+blockquote {
     color: white;
     border-image-source: url("/public/assets/gold_frame.png");
     border-image-slice: 6 6 6 6 fill;
@@ -56,7 +78,12 @@ pre:has(code),
     margin-block: 8px;
     padding: 8px;
     overflow-x: auto;
-    margin-bottom: 1em;
+    margin-bottom: 2rem !important;
+    margin-inline: 0;
+}
+
+blockquote {
+    border-image-source: url("/public/assets/note_frame.png") !important;
 }
 
 
@@ -105,18 +132,13 @@ h1 {
     margin-bottom: 2rem;
     position: relative;
     z-index: 2;
-    background-image: linear-gradient(180deg in oklch,
-            #040214,
-            #1a0f3c 25%,
-            #3c215d 50%,
-            #7d498c 75%,
-            #d799c5 100%);
+    background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
     background-clip: text;
     color: transparent;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     padding-inline: 0.7em;
-    text-shadow: 0px -4px 0px #fff;
+    text-shadow: 0px calc(-1em / 12) 0px #000;
 
     anchor-name: --page-header;
 }
@@ -182,13 +204,7 @@ time {
             box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.5);
         }
 
-        @media (hover: hover) {
-            &:hover::after {
-                display: inline-block;
-            }
-        }
-
-        &:active::after {
+        &:hover::after {
             display: inline-block;
         }
     }
